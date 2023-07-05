@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express=require("express");
 const bodyparser=require("body-parser");
 const  mongoose  = require("mongoose");
@@ -15,7 +17,7 @@ const dataschema=new mongoose.Schema({
     emailid:String,
     password:String
 })
-const secret="this is our secret";
+const secret=process.env.secret;
 dataschema.plugin(encrypt,{secret:secret,encryptedFields:['password']});
 const userdata= mongoose.model("user",dataschema);
 app.get("/",function(req,res){
